@@ -7,7 +7,8 @@ module.exports = function makeExchange(currency) {
     var numberOfDimes = 0;
     var numberOfNickels = 0;
     var numberOfPennies = 0;
-    var resultObject = {};
+    var resultObject = { };
+    //var resultObject = { "H": 0, "Q":0, "D":0, "N":0, "P":0};
     if (currency <= 0)
         return {};
     else if (currency >= 10000)
@@ -25,9 +26,29 @@ module.exports = function makeExchange(currency) {
     if (numberOfNickels >= 1)
         currency = currency - (numberOfNickels * 5);
     numberOfPennies = currency;
+    if (numberOfHalfDollars > 0)
+        resultObject.H = numberOfHalfDollars;
+    else 
+        delete resultObject.H;
+    if (numberOfQuarters > 0)
+        resultObject.Q = numberOfQuarters;
+    else
+        delete resultObject.Q;
+    if (numberOfDimes > 0)
+        resultObject.D = numberOfDimes;
+    else
+        delete resultObject.D;
+    if (numberOfNickels > 0)
+        resultObject.N = numberOfNickels;
+    else
+        delete resultObject.N;
+    if (numberOfPennies > 0)
+        resultObject.P = numberOfPennies;
+    else
+        delete resultObject.P;
     //return "in exchange, I'll give " + numberOfHalfDollars + " :HalfDollars " + numberOfQuarters + " :Quarters " + numberOfDimes + " : Dimes " + numberOfNickels + " :Nickels " + numberOfPennies + " :Pennies ";
-    resultObject = {
-        "H": numberOfHalfDollars, "Q": numberOfQuarters, "D": numberOfDimes, "N": numberOfNickels, "P": numberOfPennies
-    };
+    //resultObject = {
+    //    "H": numberOfHalfDollars, "Q": numberOfQuarters, "D": numberOfDimes, "N": numberOfNickels, "P": numberOfPennies
+    //};
     return resultObject;
 }
